@@ -3,6 +3,7 @@
 'use strict'
 
 import _ from 'lodash'
+import VueSocketio from 'vue-socket.io'
 
 function initCordova (callback) {
   if (window.cordova !== undefined) {
@@ -1255,6 +1256,7 @@ function initF7VueApp () {
   let useMixins = Object.keys(mixins).map(mixin => mixins[mixin])
   // Load custom vue script
   vue = process.env.CUSTOM_VUE_SCRIPT === 'true' ? require(process.env.APP_ROOT_FROM_SCRIPTS + 'vue.js')(vue) : vue
+  Vue.use(VueSocketio, 'ws://localhost:3000/cable')
   // Init Framework7-Vue application
   new vue({ // eslint-disable-line
     // Define root element
